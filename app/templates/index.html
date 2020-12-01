@@ -6,7 +6,13 @@
 
 	<center>
 	<form action="/submit" id="textform" method="post">
-	    <textarea name="content" rows="4" cols="50" placeholder="Tell drivers in the network your location and propose your ideal price"></textarea>
+	    <textarea name="content" rows="4" cols="50" placeholder="Tell drivers more about your order request"></textarea>
+	    <br>
+	    <input type="text" name="number" placeholder="Number of Passengers">
+	    <input type="text" name="price" placeholder="Your ideal price">
+	    <br>
+	    <input type="text" name="start" placeholder="Starting Point">
+	     <input type="text" name="end" placeholder="Destination">
 	    <br>
 	    <input type="text" name="author" placeholder="Your Name">
 	    <input type="submit" value="Post">
@@ -29,8 +35,14 @@
 	      <div class="post_box-subtitle"> Posted at <i>{{readable_time(post.timestamp)}}</i></div>
 	   </div>
 	   <div>
+	   	  <div class="post_box-info">
+	         <p> From {{post.start}} to {{post.end}} with {{post.number}} passengers</p>
+	         <p> Ideal Price: {{post.price}}</p>
+	         <p> Suggested Fair Price calculated by the System: 15.0</p>
+	         <p> Other Info:</p>
+	      </div>
 	      <div class="post_box-body">
-	         <p>{{post.content}}</p>
+	         <p >{{post.content}}</p>
 	      </div>
 	   </div>
 	</div>
@@ -80,6 +92,13 @@
 		.post_box-body {
 		    margin-top: 16px;
 		    margin-bottom: 8px;
+		}
+
+		.post_box-info {
+		    margin-top: 4px;
+		    margin-bottom: 4px;
+		    font-family: "Comic Sans MS", "Comic Sans", cursive;
+		    font-size: 18px;
 		}
 
 		.post_box-options {
