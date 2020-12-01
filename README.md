@@ -2,6 +2,8 @@
 
 CS143 Computer Networks Final Project
 
+Shuyuan X, Weiru C, Wenlin G
+
 ## Instructions to run
 
 Clone the project,
