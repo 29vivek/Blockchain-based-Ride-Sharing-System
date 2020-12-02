@@ -1,3 +1,5 @@
+## Protocol
+
 1. Assume all the drivers and passengers registered and their identity verified
 
 2. A passenger wants a ride by submitting a transaction request via our application and this request is viewable (or broadcasted) to all the people in the network. This request contains detailed info of the passenger's request (starting point and destination, number of passengers), and his/her ideal price. A passenger also deposits his/her money into the system first, in case that driver gain no money when passenger does not show up at the pick-up location
@@ -16,7 +18,7 @@
 
 9. Drivers can dispute about a review. Driver submits a dispute request by submitting a dispute node. A miner (third party) will review this dispute and consider whether or not to dicard this review. So far, we define the criteria as if the review contains swear words. The miner get some rewards (money) by doing so.
 
-things to consider / future work:
+## things to consider / future work:
 
 1. Smart contract can help notifying free drivers in the area when a new request is created
 
@@ -28,7 +30,7 @@ things to consider / future work:
 
 5. phone number, how drivers contact?
 
-edge case:
+## edge case
 
 1. Passenger not show up (considered, solve by deposit first rule)
 
