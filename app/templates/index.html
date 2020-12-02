@@ -1,26 +1,27 @@
 <!-- extend base layout -->
 {% extends "base.html" %}
 
-{% block content %}
+	{% block content %}
 	<br>
-
 	<center>
 	<form action="/submit" id="textform" method="post">
-	    <textarea name="content" rows="4" cols="50" placeholder="Tell drivers more about your order request"></textarea>
+	    <textarea name="content" rows="4" cols="50" placeholder="Tell drivers more about your order request" id="textbox"></textarea>
 	    <br>
-	    <input type="text" name="number" placeholder="Number of Passengers">
-	    <input type="text" name="price" placeholder="Your ideal price">
+	    <input type="text" name="number" class="textfields" placeholder="Number of Passengers">
+	    <input type="text" name="price" class="textfields" placeholder="Your ideal price">
 	    <br>
-	    <input type="text" name="start" placeholder="Starting Point">
-	     <input type="text" name="end" placeholder="Destination">
+	    <input type="text" name="start" class="textfields" placeholder="Starting Point">
+	     <input type="text" name="end" class="textfields" placeholder="Destination">
 	    <br>
-	    <input type="text" name="author" placeholder="Your Name">
-	    <input type="submit" value="Post">
+	    <input type="text" name="author" class="textfields" placeholder="Your Name">
+	    <br>
+	    <input type="submit" value="Post" 
+	    	class="btn btn-warning"
+	    >
 	</form>
 	</center>
 
 	<br>
-
 	<a href="{{node_address}}/mine" target="_blank"><button>Request to Mine Node</button></a>
 	<a href="/"><button>Resync Blockchain</button></a>
 
@@ -47,8 +48,9 @@
 	   </div>
 	</div>
 	{% endfor %}
+    </div>
 
-	<style>
+    <style>
 		.post_box {
 		    background: #fff;
 		    padding: 12px 0px 0px 12px;
@@ -116,6 +118,35 @@
 		    outline: none;
 		    height: 42px;
 		}
+		body {
+		  background-color: #598987;
+		  height: 35px;
+		  width: 100%;
+		  opacity: .9;
+		  margin-bottom: 10px;
+		}
+		#pageTitle {
+			color: #FF6670;
+			background-color: #77a88d;
+			padding-top: 25px;
+		}
+		#textbox {
+			width: 600px;
+			height: 120px;
+			border: 3px solid #cccccc;
+			padding: 5px;
+			font-family: Tahoma, sans-serif;
+			background-position: bottom right;
+			background-repeat: no-repeat;
+		}
+		.textfields {
+			width: 200px;
+			height: 20px;
+			border: 3px solid #cccccc;
+			padding: 15px;
+			font-family: Tahoma, sans-serif;
+			background-position: bottom right;
+			background-repeat: no-repeat;
+		}
 	</style>
-    </div>
 {% endblock %}
