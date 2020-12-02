@@ -7,24 +7,27 @@
 	<form action="/submit" id="textform" method="post">
 	    <textarea name="content" rows="4" cols="50" placeholder="Tell drivers more about your order request" id="textbox"></textarea>
 	    <br>
-	    <input type="text" name="number" class="textfields" placeholder="Number of Passengers">
-	    <input type="text" name="price" class="textfields" placeholder="Your ideal price">
-	    <br>
-	    <input type="text" name="start" class="textfields" placeholder="Starting Point">
-	     <input type="text" name="end" class="textfields" placeholder="Destination">
-	    <br>
-	    <input type="text" name="author" class="textfields" placeholder="Your Name">
-	    <br>
+	    <div id="subtextboxes">
+		    <input type="text" name="number" class="textfields" placeholder="Number of Passengers">
+		    <input type="text" name="price" class="textfields" placeholder="Your ideal price">
+		    <br>
+		    <input type="text" name="start" class="textfields" placeholder="Starting Point">
+		     <input type="text" name="end" class="textfields" placeholder="Destination">
+		    <br>
+		    <input type="text" name="author" class="textfields" placeholder="Your Name">
+		    <br>
+		 </div>
 	    <input type="submit" value="Post" 
-	    	class="btn btn-warning"
+	    	id="postbutton"
 	    >
 	</form>
 	</center>
 
 	<br>
-	<a href="{{node_address}}/mine" target="_blank"><button>Request to Mine Node</button></a>
-	<a href="/"><button>Resync Blockchain</button></a>
-
+	<div id="links">
+		<a href="{{node_address}}/mine" target="_blank" class = "linkbutton"><button>Request to Mine Node</button></a>
+		<a href="/" class = "linkbutton"><button>Resync Blockchain</button></a>
+	</div>
 	<div style="margin: 20px;">
 
     {% for post in posts %}
@@ -139,14 +142,47 @@
 			background-position: bottom right;
 			background-repeat: no-repeat;
 		}
-		.textfields {
-			width: 200px;
-			height: 20px;
+		#postbutton {
+			width: 80px;
+			height: 30px;
+			background: #FFD000;
+			color: #FF6670;
+			font-size: 17px;
 			border: 3px solid #cccccc;
 			padding: 15px;
+			text-align: center;
+			line-height: 5px;  
+		}
+		/*.linkbutton{
+			width: 20px;
+			height: 10px;
+			background: #FFD000;
+			color: #FF6670;
+			font-size: 17px;
+			border: 3px solid #cccccc;
+			padding: 15px;
+			text-align: center;
+			line-height: 5px;  
+		}*/
+		.textfields {
+			width: 200px;
+			height: 22px;
+			border: 3px solid #cccccc;
+/*			padding-bottom: 10px;
+*/			padding-right: 5px;
+			padding-left: 5px;
 			font-family: Tahoma, sans-serif;
 			background-position: bottom right;
 			background-repeat: no-repeat;
+		}
+		#subtextboxes {
+			padding-top: 5px;
+			padding-bottom: 5px;
+			padding-left: 5px;
+			padding-right: 5px;
+		}
+		#links {
+			text-align: center;
 		}
 	</style>
 {% endblock %}
