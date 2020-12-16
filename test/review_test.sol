@@ -1,17 +1,7 @@
 pragma solidity >=0.4.22 <0.8.0;
 pragma experimental ABIEncoderV2;
-// import "remix_tests.sol"; // this import is automatically injected by Remix.
-// import "remix_accounts.sol";
-// import "./test.sol";
-
-// File name has to end with '_test.sol', this file can contain more than one testSuite contracts
-
-//import "remix_tests.sol"; // this import is automatically injected by Remix.
-// import "Review.sol";
-// import "User.sol";
 
 import "../contracts/Review.sol";
-// import "../contracts/User.sol";
 
 import "truffle/Assert.sol";
 import "truffle/DeployedAddresses.sol";
@@ -19,13 +9,11 @@ import "truffle/DeployedAddresses.sol";
 contract ReviewTest {
 
     Review reviewToTest;
-    // User userToTest;
 
     string[] public description_array; // for testing description
 
    // function beforeAll () public {
        // reviewToTest = new Review();
-       // userToTest = new User();
    // }
 
     function testWriteReviewScore () public{
