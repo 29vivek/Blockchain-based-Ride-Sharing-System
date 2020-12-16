@@ -77,3 +77,35 @@ Once you do all this, you can run the application, create transactions (post mes
 $ curl -X GET http://localhost:8001/chain
 $ curl -X GET http://localhost:8002/chain
 ```
+
+## Instructions to test smart contracts with Truffle
+
+Install Python3 and NodeJS v8.9.4 or later for installing `truffle`.
+
+Inside this project, install `truffle`:
+
+```sh
+$ npm install truffle
+---------------------
+# Once the installation process is finished, you should see something like this
++ truffle@5.1.57
+```
+
+Then use the the `truffle` CLI tool to initialize a smart contract project:
+
+```sh
+$ ./node_modules/.bin/truffle init
+# if truffle was installed globally (npm install -g truffle): $ truffle init
+```
+
+Since we already have smart contracts and unit tests for the smart contracts written in this project, enter N for both `? Overwrite contracts? (y/N)` and `? Overwrite test?` during the initialization process.
+
+The above commands will create the following project structure:
+* `<span style="color:red;">contracts/</span>`: Directory for Solidity contracts source code (`<span style="color:red;">.sol</span>` files).
+* `<span style="color:red;">migrations/</span>`: Directory for contracts migration files.
+* `<span style="color:red;">test/</span>`: Directory for test files. Won't be covered in this tutorial.
+* `<span style="color:red;">truffle.js</span>`: Truffle configuration file.
+
+`contracts/` and `migrations/` folders will already contain a Migration contract and its deploy script (`1_initial_migration.js`). This contract is used by truffle to keep track of the migrations of our contracts.
+
+
