@@ -108,4 +108,84 @@ The above commands will create the following project structure:
 
 `contracts/` and `migrations/` folders will already contain a Migration contract and its deploy script (`1_initial_migration.js`). This contract is used by truffle to keep track of the migrations of our contracts.
 
+From the project root folder, use `truffle` to compile the contract:
+
+```sh
+$ ./node_modules/.bin/truffle compile  
+# or just truffle compile if installed globally
+```
+
+Create a file named `2_deploy_contract.js` inside `migrations/` folder and add the following content to it:
+
+```sh
+var Review = artifacts.require("Review");
+
+module.exports = function(deployer) {
+    deployer.deploy(Review);
+};
+```
+
+Then run the following command from the project root folder:
+
+```sh
+./node_modules/.bin/truffle develop
+# or just truffle develop if installed globally
+```
+
+You should see an output similar to the following:
+
+```sh
+Truffle Develop started at http://127.0.0.1:9545/
+
+Accounts:
+(0) 0x89527d9b56ca2f89cfb2dfd4de39f954d5393de7
+...
+(9) 0xd979bf5139b4ccb16be886a69e6db51ca5e769b9
+
+Private Keys:
+...
+
+truffle(develop)>
+```
+
+We can now `migrate` our contract, which calls each migration in `migrations/` (in order), deploying the contracts to the blockchain.
+
+```sh
+truffle(develop)> migrate
+Starting migrations...
+...
+2_deploy_contracts.js
+=====================
+
+   Deploying 'Review'
+   ----------------------
+   > transaction hash:    0x5dd32e43a668f9357a92eec6dffb57c4b8c312ef6480657bb7736ea758727347
+   > Blocks: 0            Seconds: 0
+   > contract address:    0xe2c063B744d02395393d5Aed109C7E887626bcaa
+```
+
+Finally we can `test` our contract. You should see an output similar to the following:
+
+```sh
+truffle(develop)> test
+Using network 'develop'.
+
+
+Compiling your contracts...
+===========================
+> Compiling ./test/review_test.sol
+...
+> Compiled successfully using:
+   - solc: 0.5.16+commit.9c3226ce.Emscripten.clang
+
+  ReviewTest
+    ✓ testWriteReviewScore (104ms)
+    ✓ testWriteReviewDescription (99ms)
+    ✓ testShowReviewScore (162ms)
+    ✓ testShowReviewDescription (155ms)
+    ✓ testDisputeDiscard (137ms)
+
+  5 passing (6s)
+
+```
 
