@@ -101,7 +101,7 @@ $ ./node_modules/.bin/truffle init
 Since we already have smart contracts and unit tests for the smart contracts written in this project, enter N for both `? Overwrite contracts? (y/N)` and `? Overwrite test?` during the initialization process.
 
 The above commands will create the following project structure:
-* `<span style="color:red;">contracts/</span>`: Directory for Solidity contracts source code (`<span style="color:red;">.sol</span>` files).
+* <span style="color:red;">contracts/</span>: Directory for Solidity contracts source code (`<span style="color:red;">.sol</span>` files).
 * `<span style="color:red;">migrations/</span>`: Directory for contracts migration files.
 * `<span style="color:red;">test/</span>`: Directory for test files. Won't be covered in this tutorial.
 * `<span style="color:red;">truffle.js</span>`: Truffle configuration file.
