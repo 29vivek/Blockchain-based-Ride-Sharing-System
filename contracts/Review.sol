@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
 
-// pragma abicoder v2;
 pragma experimental ABIEncoderV2;
 pragma solidity >=0.4.22 <0.8.0;
 
@@ -9,9 +8,7 @@ pragma solidity >=0.4.22 <0.8.0;
  * @dev Implements ride share process and review system
  */
  
-// import './User.sol';
 
-// contract Review is User {
 contract Review {
     struct RideReview {
         uint reviewScore;
@@ -20,10 +17,12 @@ contract Review {
         bool reviewConfirmed;
         bool discarded;
   }
-  
-    // Details about the driver
-    struct Details{
     
+    /**
+     * Reference: RideX User Contract 
+     * https://github.com/priyamshah112/RideX/blob/master/Contract/User.sol
+     */
+    struct Details{ // Details about the driver
         string privateKey;
         string password;
         string phoneNumber;
@@ -42,10 +41,14 @@ contract Review {
     }
   
     RideReview public review;
-    mapping ( string  => Details) public detailsMap;
-    mapping ( string => Rides[]) finalBid;
+    mapping (string  => Details) public detailsMap;
+    mapping (string => Rides[]) finalBid;
     
-    /* Functions for the driver object */
+    /**
+     * Reference: RideX User Contract 
+     * https://github.com/priyamshah112/RideX/blob/master/Contract/User.sol
+     */
+    // Functions for the driver object
     function get(string memory username) public view returns(string memory,string memory,string memory,string memory,string memory,string memory,string memory,uint,uint,string[] memory){
     
         Details memory currentUser=detailsMap[username];
@@ -58,9 +61,9 @@ contract Review {
             currentUser.category,
             currentUser.name,
             currentUser.password,
-            currentUser.numberOfRides,
-            currentUser.reviewScore,
-            currentUser.reviewDescriptions
+            currentUser.numberOfRides, // inital value: 0
+            currentUser.reviewScore, // initial value: 0
+            currentUser.reviewDescriptions // initial value: [""]
             
         );
     
@@ -88,16 +91,6 @@ contract Review {
         return finalBid[rider].length;
     }
     
-    
-    function getScore(string memory username) view public returns (uint) {
-        Details memory currentUser=detailsMap[username];
-        return currentUser.reviewScore;
-    }
-    
-    function getNumberOfRides(string memory username) view public returns (uint) {
-        Details memory currentUser=detailsMap[username];
-        return currentUser.numberOfRides;
-    }
   
   /* Functions for the review object */
   // called by passenger (required)
@@ -117,7 +110,6 @@ contract Review {
     review.reviewDescription = description;
   }
   
-  // (optional)
   function getDescription() view public returns (string memory) {
       return review.reviewDescription;
   }
@@ -150,45 +142,46 @@ contract Review {
   }
   
   function updateReview(string memory username) payable public{
-    // User.Details storage driver = User.detailsMap[username];
     Details storage driver = detailsMap[username];
     
     require(review.reviewConfirmed == true);
     if (review.discarded == false) {
-        // driver.numberOfRides += 1;
-        // // rating given by customer is from 0-5, we multiply it by 20 so that the score is from 0-100
-        // driver.reviewScore = ((driver.numberOfRides-1)*driver.reviewScore+20*review.reviewScore)/driver.numberOfRides;
-        // driver.reviewDescriptions.push(review.reviewDescription);
-        
         uint currNumberOfRides = driver.numberOfRides + 1;
         // rating given by customer is from 0-5, we multiply it by 20 so that the score is from 0-100
         uint updatedReviewScore = ((currNumberOfRides-1)*driver.reviewScore+20*review.reviewScore)/currNumberOfRides;
-        driver.reviewDescriptions.push(review.reviewDescription);
         
         detailsMap[username].numberOfRides = currNumberOfRides;
         detailsMap[username].reviewScore = updatedReviewScore;
-        detailsMap[username].reviewDescriptions = driver.reviewDescriptions;
+        detailsMap[username].reviewDescriptions.push(review.reviewDescription);
     }
   }
   
+  /** Funtions that display overall review score,
+   *  all review descriptions,
+   *  and total number of rides of a driver
+   */
   function showReviewScore(string memory username) view public returns (uint) {
-    // User.Details storage driver = User.detailsMap[username];
     Details storage driver = detailsMap[username];
     return driver.reviewScore;
   }
       
   function showReviewDescriptions(string memory username) view public returns (string[] memory) {
-    // User.Details storage driver = User.detailsMap[username];
     Details storage driver = detailsMap[username];
     return driver.reviewDescriptions;
   }
-  
-  // helper function
-  function compareStrings(string memory a, string memory b) public pure returns (bool) {
-        return (keccak256(abi.encodePacked((a))) == keccak256(abi.encodePacked((b))));
+    
+  function getNumberOfRides(string memory username) view public returns (uint) {
+    Details storage currentUser = detailsMap[username];
+    return currentUser.numberOfRides;
   }
   
-  // helper function
+  /* Helper functions */
+  // helper function for unit testing
+  function compareStrings(string memory a, string memory b) public pure returns (bool) {
+    return (keccak256(abi.encodePacked((a))) == keccak256(abi.encodePacked((b))));
+  }
+  
+  // helper function for unit testing
   function compareListStrings(string[] memory _a, string[] memory _b) public pure returns (bool) {
       bool same = true;
       if (_a.length != _b.length) {
@@ -202,16 +195,6 @@ contract Review {
       return same;
   }
 
-  
-//   function showReviewScore(string memory username) pure public returns (uint) {
-//     User.Details storage driver = User.detailsMap[username];
-//     return driver.reviewScore;
-//   }
-  
-//   function showReviewDescriptions(string memory username) pure public returns (string[] memory) {
-//     User.Details storage driver = User.detailsMap[username];
-//     return driver.reviewDescriptions;
-//   }
   
 }
 
