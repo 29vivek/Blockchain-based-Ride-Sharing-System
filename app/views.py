@@ -6,6 +6,15 @@ from flask import render_template, redirect, request
 
 from app import app
 
+
+'''
+The code is inspired from "How To Build A Blockchain In Python (Get Pre-Built Runtime)"
+
+Dante Sblendorio, https://www.activestate.com/blog/how-to-build-a-blockchain-in-python/
+
+THANK YOU!
+'''
+
 # The node with which our application interacts, there can be multiple
 # such nodes as well.
 CONNECTED_NODE_ADDRESS = "http://127.0.0.1:8000"
