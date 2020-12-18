@@ -4,7 +4,8 @@ CS143 Computer Networks Final Project
 
 Shuyuan X, Weiru C, Wenlin G
 
-## Planned to include a demo video. However, it turns out that the video is too large to be uploaded to GitHub. Here is the link https://drive.google.com/file/d/1QBI6_V1lLQ_Oykgiy-FpNqbsWK_u4lkC/view?usp=sharing
+## The videos are too LARGE to be uploaded to GitHub. Here is the link https://drive.google.com/file/d/1QBI6_V1lLQ_Oykgiy-FpNqbsWK_u4lkC/view?usp=sharing
+## https://drive.google.com/file/d/1-evhJOtDjh3IHu8lDocupIy9YmKyjf0k/view?usp=sharing
 
 ## Instructions to run
 
