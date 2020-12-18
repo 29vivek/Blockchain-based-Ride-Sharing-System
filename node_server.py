@@ -146,11 +146,18 @@ peers = set()
 
 
 # endpoint to submit a new transaction. This will be used by
-# our application to add new data (posts) to the blockchain
+# our application to add new data (confirmed_posts) to the blockchain
 @app.route('/new_transaction', methods=['POST'])
 def new_transaction():
     tx_data = request.get_json()
-    print(tx_data)
+    print()
+    print("A new ride request!")
+    print("Name:",tx_data["author"],"with",tx_data["number"],"people")
+    print("From",tx_data["start"],"to",tx_data["end"])
+    print("Propose Price",tx_data["price"])
+    print("Special Notes:",tx_data["content"])
+    print()
+
     required_fields = ["author","content","number","start","end","price"]
 
     for field in required_fields:
@@ -166,7 +173,7 @@ def new_transaction():
 
 # endpoint to return the node's copy of the chain.
 # Our application will be using this endpoint to query
-# all the posts to display.
+# all the confirmed_posts to display.
 @app.route('/chain', methods=['GET'])
 def get_chain():
     chain_data = []
@@ -325,4 +332,4 @@ def announce_new_block(block):
                       headers=headers)
 
 # Uncomment this line if you want to specify the port number in the code
-#app.run(debug=True, port=8000)
+# app.run(debug=True, port=8000)

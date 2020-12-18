@@ -17,9 +17,7 @@
 		    <input type="text" name="author" class="textfields" placeholder="Your Name">
 		    <br>
 		 </div>
-	    <input type="submit" value="Post" 
-	    	id="postbutton"
-	    >
+	    <input type="submit" value="Post" id="postbutton">
 	</form>
 	</center>
 
@@ -30,28 +28,43 @@
 	</div>
 	<div style="margin: 20px;">
 
-    {% for post in posts %}
-    <div class="post_box">
+	{% if post!=None %}
+	<div class="post_box">
 	   <div class="post_box-header">
-	      <div class="post_box-options"><button class="option-btn">Reply</button></div>
-	      <div style="background: rgb(0, 97, 146) none repeat scroll 0% 0%; box-shadow: rgb(0, 97, 146) 0px 0px 0px 2px;" class="post_box-avatar">{{post.author[0]}}</div>
+	   		<form action="/signup" method="post" class="post_box-options">
+			  <input type="text" name="reply" ></input>
+			  <input type="submit" value="Reply"></input>
+			</form>
+
+	      <div style="background: rgb(255, 0, 0) none repeat scroll 0% 0%; box-shadow: rgb(0, 97, 146) 0px 0px 0px 2px;" class="post_box-avatar">{{post.author[0]}}</div>
+	      <div class="post_box-subtitle"> New Request! Posted at <i>{{readable_time(post.timestamp)}}</i></div>
 	      <div class="name-header">{{post.author}}</div>
-	      <div class="post_box-subtitle"> Posted at <i>{{readable_time(post.timestamp)}}</i></div>
-	   </div>
+	      </div>
 	   <div>
 	   	  <div class="post_box-info">
 	         <p> From {{post.start}} to {{post.end}} with {{post.number}} passengers</p>
-	         <p> Ideal Price: {{post.price}}</p>
-	         <p> Suggested Fair Price calculated by the System: 15.0</p>
+	         <p> Ideal Price: {{post.price}} &nbsp;&nbsp;&nbsp;Suggested Fair Price: 15.0</p>
 	         <p> Other Info:</p>
-	      </div>
-	      <div class="post_box-body">
 	         <p >{{post.content}}</p>
+			 <br>
+	         {% for reply in replies %}
+	         <p style="color:green;">A interested driver: {{reply}}</p>
+	   		 {% endfor %}
 	      </div>
 	   </div>
 	</div>
+	{% endif %}
+
+    {% for confirmed_post in confirmed_posts %}
+    <div class="post_box">
+	   <div class="post_box-header">
+	      <div style="background: rgb(0, 97, 146) none repeat scroll 0% 0%; box-shadow: rgb(0, 97, 146) 0px 0px 0px 2px;" class="post_box-avatar">{{confirmed_post.author[0]}}</div>
+	      <div class="name-header">{{confirmed_post.author}}</div>
+	      <div class="post_box-subtitle"> Transaction Confirmed at <i>{{readable_time(confirmed_post.timestamp)}}</i></div>
+	   </div>
+	</div>
 	{% endfor %}
-    </div>
+	</div>
 
     <style>
 		.post_box {
@@ -159,23 +172,11 @@
 			text-align: center;
 			line-height: 5px;  
 		}
-		/*.linkbutton{
-			width: 20px;
-			height: 10px;
-			background: #FFD000;
-			color: #FF6670;
-			font-size: 17px;
-			border: 3px solid #cccccc;
-			padding: 15px;
-			text-align: center;
-			line-height: 5px;  
-		}*/
 		.textfields {
 			width: 200px;
 			height: 22px;
 			border: 3px solid #cccccc;
-/*			padding-bottom: 10px;
-*/			padding-right: 5px;
+			padding-right: 5px;
 			padding-left: 5px;
 			font-family: Tahoma, sans-serif;
 			background-position: bottom right;
