@@ -3,6 +3,7 @@ import json
 import time
 import requests
 from flask import render_template, redirect, request
+import random
 
 from app import app
 
@@ -29,8 +30,8 @@ def fetch_confirmed_posts():
             for tx in block["transactions"]:
                 global post
                 global replies
-                if(tx["author"]+tx["price"]+tx["number"]+tx["start"]+ \
-                    tx["end"]+tx["content"]==post["unique_id"]):
+                if(tx["author"]+tx["price"]+tx["number"]+tx["start"] +
+                        tx["end"]+tx["content"] == post["unique_id"]):
                     post = None
                     replies = []
                 tx["index"] = block["index"]
@@ -39,7 +40,7 @@ def fetch_confirmed_posts():
 
         global confirmed_posts
         confirmed_posts = sorted(content, key=lambda k: k['timestamp'],
-                       reverse=True)
+                                 reverse=True)
 
 
 @app.route('/')
@@ -66,12 +67,14 @@ def submit_textarea():
     start = request.form["start"]
     end = request.form["end"]
     number = request.form["number"]
+    fair_price = random.randint(1, 10)
 
     post_object = {
         'author': author,
         'content': post_content,
-        'price':price,
-        "number":number,
+        'price': price,
+        'fair_price': fair_price,
+        "number": number,
         "start": start,
         "end": end
     }
@@ -100,14 +103,15 @@ def submit_textarea():
 def timestamp_to_string(epoch_time):
     return datetime.datetime.fromtimestamp(epoch_time).strftime('%H:%M')
 
-@app.route('/signup', methods = ['POST'])
+
+@app.route('/signup', methods=['POST'])
 def signup():
     global replies
     replies.append(request.form['reply'])
     print("One driver is interested!")
 
     return render_template('index.html',
-                           title='Ride Request Site',
+                           title='Ride Sharing',
                            post=post,
                            replies=replies,
                            confirmed_posts=confirmed_posts,

@@ -2,7 +2,7 @@ from hashlib import sha256
 import json
 import time
 
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import requests
 
 
@@ -179,7 +179,7 @@ def get_chain():
     chain_data = []
     for block in blockchain.chain:
         chain_data.append(block.__dict__)
-    return json.dumps({"length": len(chain_data),
+    return jsonify({"length": len(chain_data),
                        "chain": chain_data,
                        "peers": list(peers)})
 

@@ -1,26 +1,29 @@
 <html>
-  <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>{{ title }}</title>
-  </head>
-  <body>
-    <div><a href="/index">Home</a></div>
-    <center id="pageTitle">
-      <img src="{{url_for('static', filename='logo.jpg')}}" width="80" height="80"/>
-      <h1 id="title">{{ title }}</h1>
-    </center>
-    <hr>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul>
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <title>{{ title }}</title>
+</head>
+
+<body>
+  <div><a href="/index">Home</a></div>
+  <center id="pageTitle">
+    <img src="{{url_for('static', filename='logo2.png')}}" width="200" height="100" />
+    <h1 id="title"><b>{{ title }}</b></h1>
+  </center>
+  <hr>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul>
     {% for message in messages %}
-        <li>{{ message }} </li>
+    <li>{{ message }} </li>
     {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-    {% block content %}{% endblock %}
-  </body>
+  </ul>
+  {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</body>
+
 </html>
